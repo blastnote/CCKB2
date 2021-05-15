@@ -11,7 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/icon.png' }
     ],
     script: [
       { src: 'https://kit.fontawesome.com/9ebf1385dd.js', crossorigin: 'anonymous' }
