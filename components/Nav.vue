@@ -24,7 +24,7 @@
                 <b-collapse id="nav-collapse" is-nav>
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto mr-5">
-                    <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/">Home</b-nav-item>
+                    <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/test">Home</b-nav-item>
                     <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/">Menu</b-nav-item>
                     <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/">Drinks</b-nav-item>
                     <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/">Contact</b-nav-item>
@@ -58,7 +58,7 @@ export default {
     display: inline;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 767px) {
     .socials {
         display: none;
     }

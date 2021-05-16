@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-primary flex pt-5 px-5 pb-1">
+    <footer class="bg-primary flex pt-5 px-5 pb-1 align-self-end">
         <div class="container">
             <div class="d-md-inline-flex w-100">
                 <div class="text-white mr-auto mb-4">
@@ -15,13 +15,20 @@
                     <p class="mb-0">Hours</p>
                     <hr class="my-1 bg-white">
                     <table>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Sunday</td><td style="padding-left: 2rem;">{{ times.sunday }}</td></tr>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Monday</td><td style="padding-left: 2rem;">{{ times.monday }}</td></tr>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Tuesday</td><td style="padding-left: 2rem;">{{ times.tuesday }}</td></tr>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Wednesday</td><td style="padding-left: 2rem;">{{ times.wednesday }}</td></tr>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Thursday</td><td style="padding-left: 2rem;">{{ times.thursday }}</td></tr>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Friday</td><td style="padding-left: 2rem;">{{ times.friday }}</td></tr>
-                        <tr><td style="border-right: solid 1px; padding-right: 2rem;">Saturday</td><td style="padding-left: 2rem;">{{ times.saturday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Sunday</td>
+                            <td style="padding-left: 1rem;">{{ times.sunday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Monday</td>
+                            <td style="padding-left: 1rem;">{{ times.monday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Tuesday</td>
+                            <td style="padding-left: 1rem;">{{ times.tuesday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Wednesday</td>
+                            <td style="padding-left: 1rem;">{{ times.wednesday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Thursday</td>
+                            <td style="padding-left: 1rem;">{{ times.thursday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Friday</td>
+                            <td style="padding-left: 1rem;">{{ times.friday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Saturday</td>
+                            <td style="padding-left: 1rem;">{{ times.saturday }}</td></tr>
                     </table>
                 </div>
             </div>
@@ -53,7 +60,7 @@ h1 {
     font-size: 2rem;
 }
 
-@media  screen and (max-width: 750px) {
+@media  screen and (max-width: 767px) {
     h1 {
         font-size: 1.5rem;
     }
