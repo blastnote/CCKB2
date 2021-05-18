@@ -3,7 +3,7 @@
         <!-- Top bar -->
         <div class="w-100 bg-primary text-white text-nowrap flex">
             <span class="addressPhone ml-lg-5 ml-md-3 mx-auto pl-lg-5 pl-md-3 pl-sm-0">
-                <a class="text-white text-decoration-none" href="https://g.page/crewittscreek?share">2037 Centennial Blvd, Independence, KY 41051</a> - 
+                <a class="text-white text-decoration-none" href="https://g.page/crewittscreek?share">2037 Centennial Blvd, Independence, KY</a> - 
                 <a class="text-white text-decoration-none" href="tel:+18593595121">(859) 359-5121</a>
             </span>
 
@@ -65,6 +65,7 @@ export default {
     .addressPhone {
         display: flex;
         justify-content: center;
+        font-size: 0.8rem;
     }
 }
 </style>
