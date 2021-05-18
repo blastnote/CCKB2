@@ -54,7 +54,6 @@ export default {
         getTime(URL) {
             axios.get(URL).then((res) => {
                 this.time = res.data;
-                console.log(this.time);
             });
         }
     }
