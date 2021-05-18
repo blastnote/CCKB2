@@ -1,13 +1,143 @@
 <template>
-    <div>
-        <Nav mode="dark" page="menu"/>
-
+    <div class="doc">
+        
+        <!-- Promotional items -->
+        <div v-if="menus != null && Object.keys(promotion).length != 0" class="promotional">
+            <Nav mode="dark" page="menu" style="position: absolute; width: 100%;"/>
+        </div>
+        <Nav v-else mode="light" />
+        <!-- Menu -->
+        <div class="container mb-5 pb-5">
+            <!-- loading spinner -->
+            <div v-if="Object.keys(menus).length == 0" style="height: 20rem;">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="row">
+                    <div class="m-3" v-for="(menu, index) in menus" :key="index">
+                        <button v-if="currentMenu == index" type="button" class="btn btn-outline-primary active"
+                        @click="currentMenu = index" style="font-size: 1.6rem;">{{index}}</button>
+                        <button v-else type="button" class="btn btn-outline-primary"
+                        @click="currentMenu = index" style="font-size: 1.6rem;">{{index}}</button>
+                    </div>
+                </div>
+                <div v-for="(section, index) in menus[currentMenu]" :key="index"
+                class="desktop">
+                    <h2 class="mt-4">{{index}}</h2>
+                    <hr class="bg-dark">
+                    <div v-for="(item, index) in section" :key="index">
+                        <div class="d-flex w-100 align-items-center">
+                            <p class="mr-auto my-0 font-weight-bold" style="font-size: 1.2rem;">{{index}}</p>
+                            <div v-if="item.new" class="bg-danger px-3 py-0 mr-2 rounded"><p class="mb-0 text-white" style="font-size: 1.1rem;">New</p></div>
+                            <div class="bg-primary px-3 py-0 mr-2 rounded"><p class="mb-0 text-white" style="font-size: 1.1rem;">{{(typeof(item.price) == "number")? '$'+item.price: item.price}}</p></div>
+                        </div>
+                        <div>
+                            <p class="my-0 text-muted">{{item.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+                <vsa-list class="mobile">
+                    <vsa-item :init-active="(index == Object.keys(menus[currentMenu])[0])?true:false" 
+                    v-for="(section, index) in menus[currentMenu]" :key="index">
+                        <vsa-heading>
+                            {{index}}
+                        </vsa-heading>
+                        <vsa-content>
+                            <div v-for="(item, index) in section" :key="index">
+                                <div class="d-flex w-100 align-items-center">
+                                    <p class="mr-auto my-0 font-weight-bold" style="font-size: 1.2rem;">{{index}}</p>
+                                    <div v-if="item.new" class="bg-danger px-3 py-0 mr-2 rounded"><p class="mb-0 text-white" style="font-size: 1.1rem;">New</p></div>
+                                    <div class="bg-primary px-3 py-0 mr-2 rounded"><p class="mb-0 text-white" style="font-size: 1.1rem;">{{(typeof(item.price) == "number")? '$'+item.price: item.price}}</p></div>
+                                </div>
+                                <div>
+                                    <p class="my-0 text-muted">{{item.desc}}</p>
+                                </div>
+                            </div>
+                        </vsa-content>
+                    </vsa-item>
+                </vsa-list>
+            </div>
+        </div>
         <Footer/>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+import {
+  VsaList,
+  VsaItem,
+  VsaHeading,
+  VsaContent,
+  VsaIcon
+} from 'vue-simple-accordion';
+import 'vue-simple-accordion/dist/vue-simple-accordion.css';
+
 export default {
-    
+    components: {
+        VsaList,
+        VsaItem,
+        VsaHeading,
+        VsaContent,
+        VsaIcon
+    },
+    mounted() {
+        this.getMenu(this.menuApiURL);
+        this.getPromotion(this.promotionApiURL);
+    },
+    data() {
+        return {
+            promotionApiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Menu&func=Promotion',
+            menuApiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Menu&func=Menu',
+            menus: {},
+            promotion: {},
+            currentMenu: ''
+        }
+    },
+    methods: {
+        getMenu(URL) {
+            axios.get(URL).then((res) => {
+                this.menus = res.data;
+                this.currentMenu = Object.keys(this.menus)[0];
+            });
+        },
+        getPromotion(URL) {
+            axios.get(URL).then((res) => {
+                this.promotion = res.data;
+            });
+        }
+    }
 }
 </script>
+
+<style scoped>
+.doc {
+    background-color: #F4F5F6;
+}
+
+.desktop {
+    display: inherit;
+}
+
+.mobile {
+    display:none
+}
+
+.promotional {
+    height: 30rem;
+    background-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 25%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0.9) 100%), url('~/assets/imgs/Hero.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media  screen and (max-width: 767px) {
+    .desktop { display: none; }
+    .mobile { display: inherit; }
+}
+
+</style>
