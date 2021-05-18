@@ -1,7 +1,5 @@
 <template>
     <div class="doc w-100">
-        
-        
         <!-- Top -->
         <div class="hero">
             <Nav mode="dark" page="home"/>
@@ -17,6 +15,7 @@
                 <div class="col-4">
                     <div class="customCard text-center">
                         <p style="font-size: 2rem;">Menu</p>
+                        <hr class="bg-dark my-0">
                         <p style="font-size: 1.1rem;">View some of our hand-crafted and perfected dishes from our own head chef.</p>
                         <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Menu</button></nuxt-link>
                     </div>
@@ -24,6 +23,7 @@
                 <div class="col-4">
                     <div class="customCard text-center">
                         <p style="font-size: 2rem;">Drinks</p>
+                        <hr class="bg-dark my-0">
                         <p style="font-size: 1.1rem;">Take a look at what's on tap and our other bar specialty drinks.</p>
                         <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Drinks</button></nuxt-link>
                     </div>
@@ -34,19 +34,72 @@
         <div class="mMenu container justify-content-center">
                 <div class="customCard text-center">
                     <p style="font-size: 2rem;">Menu</p>
+                    <hr class="bg-dark my-0">
                     <p style="font-size: 1.1rem;">View some of our hand-crafted and perfected dishes from our own head chef.</p>
                     <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Menu</button></nuxt-link>
                 </div>
                 <div class="customCard text-center" style="top: 1rem;">
                     <p style="font-size: 2rem;">Drinks</p>
+                    <hr class="bg-dark my-0">
                     <p style="font-size: 1.1rem;">Take a look at what's on tap and our other bar specialty drinks.</p>
                     <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Drinks</button></nuxt-link>
                 </div>
         </div>
         <!-- Call/Hours -->
         <div class="hours w-100 d-flex justify-content-center align-items-center" style="height: 42rem;">
-            <div class="text-white" style="background-color: ">
-                <p>test</p>
+            <div class="dHours text-white row p-5" style="background-color: rgba(58, 58, 58, 0.74);">
+                <div class="col d-flex align-items-center">
+                    <div class="text-center">
+                        <p class="my-0" style="font-size: 1.5rem">Call Today</p>
+                        <hr class="bg-white my-1" style="width: 10rem;">
+                        <a class="text-white text-decoration-none" href="tel:+18593595121">(859) 359-5121</a>
+                    </div>
+                </div>
+                <div class="col" style="min-width: 16rem;">
+                    <p class="mb-0">Hours</p>
+                    <hr class="my-1 bg-white">
+                    <table>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Sunday</td>
+                            <td style="padding-left: 1rem;">{{ time.sunday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Monday</td>
+                            <td style="padding-left: 1rem;">{{ time.monday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Tuesday</td>
+                            <td style="padding-left: 1rem;">{{ time.tuesday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Wednesday</td>
+                            <td style="padding-left: 1rem;">{{ time.wednesday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Thursday</td>
+                            <td style="padding-left: 1rem;">{{ time.thursday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Friday</td>
+                            <td style="padding-left: 1rem;">{{ time.friday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Saturday</td>
+                            <td style="padding-left: 1rem;">{{ time.saturday }}</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="mHours text-white mt-5 p-5" style="background-color: rgba(58, 58, 58, 0.74);">
+                    <div class="text-center mb-4">
+                        <a class="mt-md-5 btn btn-primary" style="font-size: 1.5rem" href="tel:+18593595121" role="button">Call Today</a>
+                    </div>
+                    <div>
+                    <p class="mb-0">Hours</p>
+                    <hr class="my-1 bg-white">
+                    <table>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Sunday</td>
+                            <td style="padding-left: 1rem;">{{ time.sunday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Monday</td>
+                            <td style="padding-left: 1rem;">{{ time.monday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Tuesday</td>
+                            <td style="padding-left: 1rem;">{{ time.tuesday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Wednesday</td>
+                            <td style="padding-left: 1rem;">{{ time.wednesday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Thursday</td>
+                            <td style="padding-left: 1rem;">{{ time.thursday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Friday</td>
+                            <td style="padding-left: 1rem;">{{ time.friday }}</td></tr>
+                        <tr><td style="border-right: solid 2px; padding-right: 1rem;">Saturday</td>
+                            <td style="padding-left: 1rem;">{{ time.saturday }}</td></tr>
+                    </table>
+                    </div>
             </div>
         </div>
         <!-- Map -->
@@ -65,16 +118,15 @@
         <div class="touch">
             <div class="container text-white" style="min-height: 30rem;">
                 <div class="h-100 row justify-content-around align-items-center py-5">
-                    <div class="text-center" style="max-width:25rem;">
+                    <div class="text-center mb-5" style="max-width:20rem;">
                         <p style="font-size: 2rem;">Keep in Touch!</p>
                         <hr class="bg-white my-0">
                         <p>Let us know how we are doing and keep up to date with what we do on Facebook and Instagram!</p>
-                        <a class="mx-1" href="https://www.facebook.com/crewittscreek/"><i class="fab fa-facebook-square text-white"></i></a>
-                        <a class="mx-2" href="https://www.instagram.com/crewittscreek/"><i class="fab fa-instagram text-white"></i></a>
+                        <a class="mx-1" href="https://www.facebook.com/crewittscreek/"><i style="font-size:3rem;" class="fab fa-facebook-square text-white"></i></a>
+                        <a class="mx-2" href="https://www.instagram.com/crewittscreek/"><i style="font-size:3rem;" class="fab fa-instagram text-white"></i></a>
                     </div>
-                    <div class="bg-white">
-                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="Ssk4Re41"></script>
-                        <div class="fb-post" :data-href="fbLink" data-width="300px" data-show-text="true"></div>
+                    <div class="bg-white" style="width: 320px; height: 500px">
+                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fcrewittscreek%2F&tabs=timeline&width=320&height=500&small_header=true&adapt_container_width=false&hide_cover=false&show_facepile=false&appId" width="320" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                     </div>
                 </div>
             </div>
@@ -85,12 +137,26 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+    mounted() {
+        this.getTime(this.apiURL)
+    },
     data() {
         return {
-            fbLink: 'https://www.facebook.com/crewittscreek/photos/a.257669331366345/1154140221719247/?type=3&theater'
+            apiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Time&func=Time',
+            time: {}
         }
     },
+    methods: {
+        getTime(URL) {
+            axios.get(URL).then((res) => {
+                this.time = res.data;
+                console.log(this.time);
+            });
+        }
+    }
 }
 </script>
 
@@ -139,6 +205,14 @@ export default {
     background-repeat: no-repeat;
 }
 
+.dHours {
+    display: inherit;
+}
+
+.mHours {
+    display: none;
+}
+
 .touch {
     min-height: 30rem;
     background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0.8) 100%), url('~/assets/imgs/Find us.jpg');
@@ -148,9 +222,11 @@ export default {
 }
 
 @media  screen and (max-width: 767px) {
+    .Creek { font-size: 3rem; }
     .dMenu { display: none; }
     .mMenu { display: inherit; }
-    .Creek { font-size: 3rem; }
+    .dHours { display: none; }
+    .mHours { display: block; }
     .map { display: none; }
 }
 
