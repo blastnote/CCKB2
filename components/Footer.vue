@@ -16,19 +16,19 @@
                     <hr class="my-1 bg-white">
                     <table>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Sunday</td>
-                            <td style="padding-left: 1rem;">{{ times.sunday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.sunday }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Monday</td>
-                            <td style="padding-left: 1rem;">{{ times.monday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.monday }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Tuesday</td>
-                            <td style="padding-left: 1rem;">{{ times.tuesday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.tuesday }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Wednesday</td>
-                            <td style="padding-left: 1rem;">{{ times.wednesday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.wednesday }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Thursday</td>
-                            <td style="padding-left: 1rem;">{{ times.thursday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.thursday }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Friday</td>
-                            <td style="padding-left: 1rem;">{{ times.friday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.friday }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Saturday</td>
-                            <td style="padding-left: 1rem;">{{ times.saturday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ time.saturday }}</td></tr>
                     </table>
                 </div>
             </div>
@@ -38,20 +38,26 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+    mounted() {
+        this.getTime(this.apiURL)
+    },
     data() {
         return {
-            times: {
-                sunday: '11am - 8pm',
-                monday: 'Closed',
-                tuesday: '4pm - 9pm',
-                wednesday: '4pm - 9pm',
-                thursday: '4pm - 9pm',
-                friday: '4pm - 10pm',
-                saturday: '11am - 10pm'
-            }
+            apiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Time&func=Time',
+            time: {}
         }
     },
+    methods: {
+        getTime(URL) {
+            axios.get(URL).then((res) => {
+                this.time = res.data;
+                console.log(this.time);
+            });
+        }
+    }
 }
 </script>
 
