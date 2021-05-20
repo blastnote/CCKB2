@@ -17,7 +17,7 @@
                         <p style="font-size: 2rem;">Menu</p>
                         <hr class="bg-dark my-0">
                         <p style="font-size: 1.1rem;">View some of our hand-crafted and perfected dishes from our own head chef.</p>
-                        <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Menu</button></nuxt-link>
+                        <nuxt-link to="/menu"><button type="button" class="btn btn-primary">View Our Menu</button></nuxt-link>
                     </div>
                 </div>
                 <div class="col-4">
@@ -25,7 +25,7 @@
                         <p style="font-size: 2rem;">Drinks</p>
                         <hr class="bg-dark my-0">
                         <p style="font-size: 1.1rem;">Take a look at what's on tap and our other bar specialty drinks.</p>
-                        <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Drinks</button></nuxt-link>
+                        <nuxt-link to="/drinks"><button type="button" class="btn btn-primary">View Our Drinks</button></nuxt-link>
                     </div>
                 </div>
             </div>
@@ -36,13 +36,13 @@
                     <p style="font-size: 2rem;">Menu</p>
                     <hr class="bg-dark my-0">
                     <p style="font-size: 1.1rem;">View some of our hand-crafted and perfected dishes from our own head chef.</p>
-                    <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Menu</button></nuxt-link>
+                    <nuxt-link to="/menu"><button type="button" class="btn btn-primary">View Our Menu</button></nuxt-link>
                 </div>
                 <div class="customCard text-center" style="top: 1rem;">
                     <p style="font-size: 2rem;">Drinks</p>
                     <hr class="bg-dark my-0">
                     <p style="font-size: 1.1rem;">Take a look at what's on tap and our other bar specialty drinks.</p>
-                    <nuxt-link to="/test"><button type="button" class="btn btn-primary">View Our Drinks</button></nuxt-link>
+                    <nuxt-link to="/drinks"><button type="button" class="btn btn-primary">View Our Drinks</button></nuxt-link>
                 </div>
         </div>
         <!-- Call/Hours -->
@@ -60,19 +60,19 @@
                     <hr class="my-1 bg-white">
                     <table>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Sunday</td>
-                            <td style="padding-left: 1rem;">{{ time.sunday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.sunday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Monday</td>
-                            <td style="padding-left: 1rem;">{{ time.monday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.monday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Tuesday</td>
-                            <td style="padding-left: 1rem;">{{ time.tuesday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.tuesday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Wednesday</td>
-                            <td style="padding-left: 1rem;">{{ time.wednesday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.wednesday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Thursday</td>
-                            <td style="padding-left: 1rem;">{{ time.thursday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.thursday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Friday</td>
-                            <td style="padding-left: 1rem;">{{ time.friday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.friday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Saturday</td>
-                            <td style="padding-left: 1rem;">{{ time.saturday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.saturday.time }}</td></tr>
                     </table>
                 </div>
             </div>
@@ -85,19 +85,19 @@
                     <hr class="my-1 bg-white">
                     <table>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Sunday</td>
-                            <td style="padding-left: 1rem;">{{ time.sunday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.sunday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Monday</td>
-                            <td style="padding-left: 1rem;">{{ time.monday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.monday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Tuesday</td>
-                            <td style="padding-left: 1rem;">{{ time.tuesday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.tuesday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Wednesday</td>
-                            <td style="padding-left: 1rem;">{{ time.wednesday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.wednesday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Thursday</td>
-                            <td style="padding-left: 1rem;">{{ time.thursday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.thursday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Friday</td>
-                            <td style="padding-left: 1rem;">{{ time.friday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.friday.time }}</td></tr>
                         <tr><td style="border-right: solid 2px; padding-right: 1rem;">Saturday</td>
-                            <td style="padding-left: 1rem;">{{ time.saturday }}</td></tr>
+                            <td style="padding-left: 1rem;">{{ times.saturday.time }}</td></tr>
                     </table>
                     </div>
             </div>
@@ -141,18 +141,26 @@ import axios from "axios";
 
 export default {
     mounted() {
-        this.getTime(this.apiURL)
+        this.getTimes(this.apiURL)
     },
     data() {
         return {
             apiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Time&func=Time',
-            time: {}
+            times: {
+                "sunday": { "time": "11am - 8pm", "special": false },
+                "monday": { "time": "Closed", "special": false },
+                "tuesday": { "time": "4pm - 9pm", "special": false },
+                "wednesday": { "time": "4pm - 9pm", "special": false },
+                "thursday": { "time": "4pm - 9pm", "special": false },
+                "friday": { "time": "4pm - 10pm", "special": false },
+                "saturday": { "time": "11am - 10pm", "special": false }
+            }
         }
     },
     methods: {
-        getTime(URL) {
+        getTimes(URL) {
             axios.get(URL).then((res) => {
-                this.time = res.data;
+                this.times = res.data;
             });
         }
     }
