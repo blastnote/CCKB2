@@ -24,10 +24,10 @@
                 <b-collapse id="nav-collapse" is-nav>
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto mr-5">
-                    <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/">Home</b-nav-item>
-                    <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/menu">Menu</b-nav-item>
-                    <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/drinks">Drinks</b-nav-item>
-                    <b-nav-item class="mx-4" style="font-size: 1.5rem;" to="/contact">Contact</b-nav-item>
+                    <b-nav-item :class="(page == 'home')?'mx-2 px-2 border border-primary':'mx-2 px-2'" style="font-size: 1.5rem;" to="/">Home</b-nav-item>
+                    <b-nav-item :class="(page == 'menu')?'mx-2 px-2 border border-primary':'mx-2 px-2'" style="font-size: 1.5rem;" to="/menu">Menu</b-nav-item>
+                    <b-nav-item :class="(page == 'drinks')?'mx-2 px-2 border border-primary':'mx-2 px-2'" style="font-size: 1.5rem;" to="/drinks">Drinks</b-nav-item>
+                    <b-nav-item :class="(page == 'contact')?'mx-2 px-2 border border-primary':'mx-2 px-2'" style="font-size: 1.5rem;" to="/contact">Contact</b-nav-item>
                 </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
