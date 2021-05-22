@@ -10,6 +10,7 @@
                     <hr class="my-0 bg-white" style="width: 5rem;">
                     <a class="mx-1" href="https://www.facebook.com/crewittscreek/"><i class="fab fa-facebook-square text-white"></i></a>
                     <a class="mx-2" href="https://www.instagram.com/crewittscreek/"><i class="fab fa-instagram text-white"></i></a>
+                    <p class="mt-3"><nuxt-link to="/application" class="text-white text-decoration-none">Apply Here!</nuxt-link></p>
                 </div>
                 <div class="text-white mb-4">
                     <p class="mb-0">Hours</p>
