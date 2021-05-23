@@ -1,11 +1,6 @@
 <template>
     <div class="doc">
-        
-        <!-- Promotional items -->
-        <div v-if="menus != null && Object.keys(promotion).length != 0" class="promotional">
-            <Nav mode="dark" page="menu" style="position: absolute; width: 100%;"/>
-        </div>
-        <Nav v-else mode="light" />
+        <Nav mode="light" currentPage="Menu" />
         <!-- Menu -->
         <div class="container mb-5 pb-5">
             <!-- loading spinner -->
@@ -87,14 +82,11 @@ export default {
     },
     mounted() {
         this.getMenu(this.menuApiURL);
-        this.getPromotion(this.promotionApiURL);
     },
     data() {
         return {
-            promotionApiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Menu&func=Promotion',
             menuApiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Menu&func=Menu',
             menus: {},
-            promotion: {},
             currentMenu: ''
         }
     },
@@ -103,11 +95,6 @@ export default {
             axios.get(URL).then((res) => {
                 this.menus = res.data;
                 this.currentMenu = Object.keys(this.menus)[0];
-            });
-        },
-        getPromotion(URL) {
-            axios.get(URL).then((res) => {
-                this.promotion = res.data;
             });
         }
     }
@@ -124,15 +111,8 @@ export default {
 }
 
 .mobile {
-    display:none
-}
-
-.promotional {
-    height: 30rem;
-    background-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 25%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0.9) 100%), url('~/assets/imgs/Hero.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    display:none;
+    --vsa-highlight-color: #007bff;
 }
 
 @media  screen and (max-width: 767px) {
