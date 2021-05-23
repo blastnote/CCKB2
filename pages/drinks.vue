@@ -1,6 +1,6 @@
 <template>
     <div class="doc">
-        <Nav mode="light" page="drinks"/>
+        <Nav mode="light" currentPage="Drinks"/>
         <div class="container mb-5 pb-5">
             <!-- loading spinner -->
             <div v-if="Object.keys(drinks).length == 0" style="height: 20rem;">

@@ -1,6 +1,6 @@
 <template>
     <div class="doc">
-        <Nav mode="light" page="contact"/>
+        <Nav mode="light" currentPage="Contact"/>
         <div class="container d-flex">
             <div class="question card p-4 mb-5 mx-auto">
                 <h3>Need to ask a question? Send us a message!</h3>

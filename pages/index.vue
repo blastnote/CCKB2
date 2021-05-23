@@ -2,7 +2,7 @@
     <div class="doc w-100">
         <!-- Top -->
         <div class="hero">
-            <Nav mode="dark" page="home"/>
+            <Nav mode="dark" currentPage="Home"/>
             <div class="d-flex justify-content-center align-items-center" style="height: 30rem;">
                 <i class="mx-3 text-white fas fa-circle"></i>
                 <p class="Creek text-white text-center">Welcome To The Creek</p>
