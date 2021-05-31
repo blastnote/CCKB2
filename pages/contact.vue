@@ -20,7 +20,7 @@
                         rows="6"
                     ></b-form-textarea>
                     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                    <div class="g-recaptcha my-1" data-sitekey="your_site_key"></div>
+                    <div class="g-recaptcha my-1" data-sitekey="6LcoDv0aAAAAAANS-aal3iMGZQiZUZ22lmfa7R5V"></div>
                     <b-button type="submit" variant="primary">Submit</b-button>
                 </b-form>
             </div>
