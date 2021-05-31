@@ -118,13 +118,16 @@ export default {
         },
         onSubmit() {
             this.nonRobotBool = grecaptcha.getResponse();
-            if (this.nonRobotBool) { alert("Form submitted!") };
-            // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.form)
-            //     .then(function(response) {
-            //     console.log('SUCCESS!', response.status, response.text);
-            //     }, function(error) {
-            //     console.log('FAILED...', error);
-            //     });
+            // if (this.nonRobotBool) { 
+            //     emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.form)
+            //         .then(function(response) {
+            //             console.log('SUCCESS!', response.status, response.text);
+            //             alert("Thank you for submitting your application");
+            //             this.form = {name: '', email: '', phone: '', position: null}
+            //         }, function(error) {
+            //             console.log('FAILED...', error);
+            //         });
+            // }
         }
     }
 }
