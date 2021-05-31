@@ -13,6 +13,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.9.1",
+    "emailjs-com": "^2.6.4",
     "nuxt": "^2.15.3",
     "vee-validate": "^3.4.5",
     "vue-simple-accordion": "^0.1.0"
