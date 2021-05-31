@@ -4,22 +4,76 @@
         <div class="container d-flex">
             <div class="application card p-4 mb-5 mx-auto">
                 <h3>Employee application</h3>
-                <b-form>
-                    <label for="input-name">Name:</label>
-                    <b-form-input v-model="form.name" id="input-name" placeholder="Enter your name"></b-form-input>
-                    <label for="input-email">Email:</label>
-                    <b-form-input v-model="form.email" id="input-email" placeholder="Enter your email"></b-form-input>
-                    <label for="input-phone">Phone:</label>
-                    <b-form-input v-model="form.phone" id="input-phone" placeholder="Enter your phone number"></b-form-input>
-                    <label for="input-position">Position:</label>
-                    <b-form-select v-model="form.position" id="input-position" :options="positionOptions"></b-form-select>
-                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                    <div class="g-recaptcha my-1" data-sitekey="your_site_key"></div>
-                    <b-button type="submit" variant="primary">Submit</b-button>
-                </b-form>
-            </div>
-            <div>
-
+                <validation-observer ref="observer" v-slot="{ handleSubmit }">
+                    <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
+                        <validation-provider name="Name" :rules="{ required: true }" v-slot="validationContext">
+                            <b-form-group id="NameGroup" label="Name:" label-for="input-name">
+                                <b-form-input
+                                    name="input-phone"
+                                    id="input-name"
+                                    type="text"
+                                    v-model="form.name"
+                                    placeholder="Enter your name"
+                                    :state="getValidationState(validationContext)"
+                                    aria-describedby="input-name-live-feedback"
+                                ></b-form-input>
+                                <b-form-invalid-feedback id="input-name-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                        <validation-provider name="Email" :rules="{ required: true, email: true }" v-slot="validationContext">
+                            <b-form-group id="EmailGroup" label="Email:" label-for="input-email">
+                                <b-form-input
+                                    name="input-email"
+                                    id="input-email"
+                                    type="email"
+                                    v-model="form.email"
+                                    placeholder="Enter your email"
+                                    :state="getValidationState(validationContext)"
+                                    aria-describedby="input-email-live-feedback"
+                                ></b-form-input>
+                                <b-form-invalid-feedback id="input-email-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                        <validation-provider name="Phone" :rules="{ required: true, numeric: true, min: 10 }" v-slot="validationContext">
+                            <b-form-group id="PhoneGroup" label="Phone:" label-for="input-phone">
+                                <b-form-input
+                                    name="input-phone"
+                                    id="input-phone"
+                                    type="tel"
+                                    v-model="form.phone"
+                                    placeholder="Enter your phone number"
+                                    :state="getValidationState(validationContext)"
+                                    aria-describedby="input-phone-live-feedback"
+                                ></b-form-input>
+                                <b-form-invalid-feedback id="input-phone-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                        <validation-provider name="Position" :rules="{ required: true }" v-slot="validationContext">
+                            <b-form-group id="PositionGroup" label="Position:" label-for="input-position">
+                                <b-form-select
+                                    name="input-position"
+                                    id="input-position"
+                                    v-model="form.position"
+                                    :options="positionOptions"
+                                    :state="getValidationState(validationContext)"
+                                    aria-describedby="input-position-live-feedback"
+                                ></b-form-select>
+                                <b-form-invalid-feedback id="input-position-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                        <validation-provider name="Robot" :rules="{ required: true }" v-slot="validationContext">
+                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            <div
+                                class="g-recaptcha my-1"
+                                data-sitekey="6LcoDv0aAAAAAANS-aal3iMGZQiZUZ22lmfa7R5V"
+                                data-callback="nonRobot(true)"
+                                data-expired-callback="nonRobot(false)"
+                            ></div>
+                            <b-form-invalid-feedback id="input-robot-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                        </validation-provider>
+                        <b-button type="submit" variant="primary">Submit</b-button>
+                    </b-form>
+                </validation-observer>
             </div>
         </div>
         <Footer />
@@ -27,9 +81,23 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
+import * as rules from 'vee-validate/dist/rules';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { messages } from 'vee-validate/dist/locale/en.json';
+
+Object.keys(rules).forEach(rule => {
+  extend(rule, { ...rules[rule],message: messages[rule] });
+});
+
 export default {
+    components: {
+        ValidationProvider,
+        ValidationObserver
+    },
     data() {
         return {
+            nonRobotBool: false,
             form: {
                 name: '',
                 email: '',
@@ -47,7 +115,24 @@ export default {
             ]
         }
     },
-}
+    methods: {
+        nonRobot(bool) {
+            this.nonRobotBool = bool;
+        },
+        getValidationState({ dirty, validated, valid = null }) {
+            return dirty || validated ? valid : null;
+        },
+        onSubmit(event) {
+            alert("Form submitted!");
+            // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.form, 'YOUR_USER_ID')
+            //     .then(function(response) {
+            //     console.log('SUCCESS!', response.status, response.text);
+            //     }, function(error) {
+            //     console.log('FAILED...', error);
+            //     });
+        }
+    }
+}// end export
 </script>
 
 <style scoped>
