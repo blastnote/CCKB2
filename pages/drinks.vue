@@ -130,8 +130,6 @@ export default {
     },
     data() {
         return {
-            canBeersApiURL: 'https://business.untappd.com/api/v1/sections/196806/items',
-            bottleBeersApiURL: 'https://business.untappd.com/api/v1/sections/196798/items',
             draftBeersApiURL: 'https://business.untappd.com/api/v1/sections/147378/items',
             drinksApiURL: 'https://script.google.com/macros/s/AKfycbyLY0BDQQQqrr3uT_xF8SvewWkX7eH__rSzfCMQ2YkeL0uqbsIXC_2QIocDbacCQB2X/exec?ID=1ZuwXTWvdm0NDR_SSYTwOQ-I00lRlVMVV3Yv6tar4zd0&SH=Drinks&func=Drinks',
             drinks: {},
@@ -148,16 +146,6 @@ export default {
             //Add Can Beers to Untappd Data
             axios.get(this.draftBeersApiURL, { headers: { 'Authorization':'Basic Y3Jld2l0dHNjcmVla0BnbWFpbC5jb206Qk15TndpdVJheEEtdlJkc3Y3eHY=' } }).then((res) => {
                 this.untappdData[0] = { 'Draft Beers': res.data };
-            });
-
-            //Add Can Beers to Untappd Data
-            axios.get(this.bottleBeersApiURL, { headers: { 'Authorization':'Basic Y3Jld2l0dHNjcmVla0BnbWFpbC5jb206Qk15TndpdVJheEEtdlJkc3Y3eHY=' } }).then((res) => {
-                this.untappdData[1] = { 'Bottle Beers': res.data };
-            });
-
-            //Add Can Beers to Untappd Data
-            axios.get(this.canBeersApiURL, { headers: { 'Authorization':'Basic Y3Jld2l0dHNjcmVla0BnbWFpbC5jb206Qk15TndpdVJheEEtdlJkc3Y3eHY=' } }).then((res) => {
-                this.untappdData[2] = { 'Can Beers': res.data };
             });
         }
     }
