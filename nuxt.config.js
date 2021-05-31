@@ -41,8 +41,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // Add exception
+    transpile: [
+      "vee-validate/dist/rules"
+    ],
   },
-  
+
   server: {
     host: "0.0.0.0"
   }
