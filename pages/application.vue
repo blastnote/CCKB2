@@ -6,7 +6,7 @@
                 <h3>Employee application</h3>
                 <validation-observer ref="observer" v-slot="{ handleSubmit }">
                     <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
-                        <validation-provider name="Name" :rules="{ required: true }" v-slot="validationContext">
+                        <validation-provider mode="lazy" name="Name" :rules="{ required: true }" v-slot="validationContext">
                             <b-form-group id="NameGroup" label="Name:" label-for="input-name">
                                 <b-form-input
                                     name="input-phone"
@@ -20,7 +20,7 @@
                                 <b-form-invalid-feedback id="input-name-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                             </b-form-group>
                         </validation-provider>
-                        <validation-provider name="Email" :rules="{ required: true, email: true }" v-slot="validationContext">
+                        <validation-provider mode="lazy" name="Email" :rules="{ required: true, email: true }" v-slot="validationContext">
                             <b-form-group id="EmailGroup" label="Email:" label-for="input-email">
                                 <b-form-input
                                     name="input-email"
@@ -34,7 +34,7 @@
                                 <b-form-invalid-feedback id="input-email-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                             </b-form-group>
                         </validation-provider>
-                        <validation-provider name="Phone" :rules="{ required: true, numeric: true, min: 10 }" v-slot="validationContext">
+                        <validation-provider mode="lazy" name="Phone" :rules="{ required: true, numeric: true, min: 10 }" v-slot="validationContext">
                             <b-form-group id="PhoneGroup" label="Phone:" label-for="input-phone">
                                 <b-form-input
                                     name="input-phone"
@@ -61,16 +61,11 @@
                                 <b-form-invalid-feedback id="input-position-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                             </b-form-group>
                         </validation-provider>
-                        <validation-provider name="Robot" :rules="{ required: true }" v-slot="validationContext">
                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                             <div
                                 class="g-recaptcha my-1"
                                 data-sitekey="6LcoDv0aAAAAAANS-aal3iMGZQiZUZ22lmfa7R5V"
-                                data-callback="nonRobot(true)"
-                                data-expired-callback="nonRobot(false)"
                             ></div>
-                            <b-form-invalid-feedback id="input-robot-live-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                        </validation-provider>
                         <b-button type="submit" variant="primary">Submit</b-button>
                     </b-form>
                 </validation-observer>
@@ -81,10 +76,12 @@
 </template>
 
 <script>
-import emailjs from 'emailjs-com';
+import { init, emailjs } from 'emailjs-com';
 import * as rules from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { messages } from 'vee-validate/dist/locale/en.json';
+
+//init("YOUR_USER_ID");
 
 Object.keys(rules).forEach(rule => {
   extend(rule, { ...rules[rule],message: messages[rule] });
@@ -116,15 +113,13 @@ export default {
         }
     },
     methods: {
-        nonRobot(bool) {
-            this.nonRobotBool = bool;
-        },
         getValidationState({ dirty, validated, valid = null }) {
             return dirty || validated ? valid : null;
         },
-        onSubmit(event) {
-            alert("Form submitted!");
-            // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.form, 'YOUR_USER_ID')
+        onSubmit() {
+            this.nonRobotBool = grecaptcha.getResponse();
+            if (this.nonRobotBool) { alert("Form submitted!") };
+            // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.form)
             //     .then(function(response) {
             //     console.log('SUCCESS!', response.status, response.text);
             //     }, function(error) {
@@ -132,7 +127,7 @@ export default {
             //     });
         }
     }
-}// end export
+}
 </script>
 
 <style scoped>
