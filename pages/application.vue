@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { init, emailjs } from 'emailjs-com';
+import axios from "axios";
 import * as rules from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { messages } from 'vee-validate/dist/locale/en.json';
@@ -116,15 +116,21 @@ export default {
         },
         onSubmit() {
             this.nonRobotBool = grecaptcha.getResponse();
-            if (this.nonRobotBool) { 
-                emailjs.send('service_2psgefq', 'template_t15pwdg', this.form, user_uioIfrRIm77FykSiVOyeI)
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        alert("Thank you for submitting your application");
-                        this.form = {name: '', email: '', phone: '', position: null}
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                    });
+            if (this.nonRobotBool) {
+                axios.post('https://api.emailjs.com/api/v1.0/email/send', {
+                    service_id: 'service_2psgefq',
+                    template_id: 'template_t15pwdg',
+                    user_id: 'user_uioIfrRIm77FykSiVOyeI',
+                    template_params: this.form
+                })
+                .then((res) => {
+                    console.log('SUCCESS!', res.status, res.text);
+                    this.form = {name: '', email: '', phone: '', position: null};
+                    alert("Thank you for submitting your application");
+                })
+                .catch((err) => {
+                    console.log('FAILED...', err);
+                });
             }
         }
     }
