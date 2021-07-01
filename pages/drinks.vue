@@ -138,23 +138,13 @@ export default {
     },
     methods: {
         getDrinks() {
-            axios.get(this.drinksApiURL)
-            .then((res) => {
+            axios.get(this.drinksApiURL).then((res) => {
                 this.drinks = res.data;
-            })
-            .catch((err) => {
-                console.log('FAILED...', err);
-                axios.get('/drinks.json')
-                .then((res) => {
-                    console.log('SUCCESS...', res);
-                    this.drinks = res.data;
-                });
             });
         },
         getUntappd() {
             //Add Can Beers to Untappd Data
-            axios.get(this.draftBeersApiURL, { headers: { 'Authorization':'Basic Y3Jld2l0dHNjcmVla0BnbWFpbC5jb206Qk15TndpdVJheEEtdlJkc3Y3eHY=' } })
-            .then((res) => {
+            axios.get(this.draftBeersApiURL, { headers: { 'Authorization':'Basic Y3Jld2l0dHNjcmVla0BnbWFpbC5jb206Qk15TndpdVJheEEtdlJkc3Y3eHY=' } }).then((res) => {
                 this.untappdData[0] = { 'Draft Beers': res.data };
             });
         }

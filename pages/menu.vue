@@ -81,7 +81,7 @@ export default {
         VsaIcon
     },
     mounted() {
-        this.getMenu();
+        this.getMenu(this.menuApiURL);
     },
     data() {
         return {
@@ -91,21 +91,10 @@ export default {
         }
     },
     methods: {
-        getMenu() {
-            axios.get(this.menuApiURL)
-            .then((res) => {
-                console.log('SUCCESS...', res);
+        getMenu(URL) {
+            axios.get(URL).then((res) => {
                 this.menus = res.data;
                 this.currentMenu = Object.keys(this.menus)[0];
-            })
-            .catch((err) => {
-                console.log('FAILED...', err);
-                axios.get('/menus.json')
-                .then((res) => {
-                    console.log('SUCCESS...', res);
-                    this.menus = res.data;
-                    this.currentMenu = Object.keys(this.menus)[0];
-                });
             });
         }
     }
