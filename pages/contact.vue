@@ -91,8 +91,6 @@ import * as rules from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { messages } from 'vee-validate/dist/locale/en.json';
 
-//init("YOUR_USER_ID");
-
 Object.keys(rules).forEach(rule => {
   extend(rule, { ...rules[rule],message: messages[rule] });
 });
